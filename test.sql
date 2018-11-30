@@ -1,0 +1,1 @@
+SELECT p.`PRO_NAME`, p.`PRICE`, p.`PEOPLE_MIN`, p.`PEOPLE_MAX`, p_img.`IMG_NAME` FROM `products` p JOIN `product_images` p_img ON p.`PRO_SEQ`=p_img.`PRO_SEQ` WHERE p_img.`STATUS`='M' AND P_ID=
