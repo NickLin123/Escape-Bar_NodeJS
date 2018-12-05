@@ -68,16 +68,4 @@ router.route('/store/:sid')
         });
     });
 
-
-// 部落格文章
-router.route('/article/:name')
-    .get((req, res, next) => {
-        connection.query("SELECT * FROM articles WHERE article_name=?", req.params.name, (err, results)=>{
-            if(err){return res.send(err)};
-            return res.json({
-                data:results
-            })
-        });
-    });
-
 module.exports = router;
