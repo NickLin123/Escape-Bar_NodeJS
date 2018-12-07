@@ -38,6 +38,7 @@ router
       // res.send(JSON.parse(req.params.data).price)
       });
   })
+// get SearchBar
 router
   .route("/pro_list/search/:text")
   .get(function(req,res){
@@ -48,6 +49,7 @@ router
         res.json(results)
       })
   });
+// get filter
 router
   .route("/pro_list/filter/:str")
   .get(function(req,res){
@@ -58,6 +60,7 @@ router
         res.json(results)
       })
   })
+// get product_images
 router
   .route('/pro_list/products/:id')
   .get(function(req,res){
@@ -68,6 +71,7 @@ router
         res.json(results)
       })
   })
+// get product_stocks
 router
   .route('/pro_list/products/stock/:pid')
   .get(function(req,res){
@@ -79,6 +83,28 @@ router
       }
     )
   })
-
-
+// get 不同場館
+router
+  .route('/pro_list/products/site_name/:str')
+  .get(function(req,res){
+    connection.query(
+      "SELECT p.`PRO_SEQ`, m.`site_name` FROM `products` p JOIN `markers` m ON p.`P_ID` = m.`sid` WHERE " + req.params.str
+      , function(error, results) {
+        if(error) throw error;
+        res.json(results)
+      }
+    )
+  })
+//get 換場館
+router
+  .route('/pro_list/site/:id')
+  .get(function(req,res){
+    connection.query(
+      selectProductsStr + " WHERE p.`PRO_SEQ` = " + req.params.id
+      , function(error, results) {
+        if(error) throw error;
+        res.json(results)
+      }
+    )
+  })
 module.exports = router;
