@@ -4,10 +4,11 @@ var mysql = require("mysql");
 
 //建立連線
 var connection = mysql.createConnection({
-  host: "localhost",
-  database: "react",
-  user: "root",
-  password: ""
+  host: 'localhost',
+  // host: "192.168.24.140",
+  user: 'mick',
+  password: '5678',
+  database: 'escapebar_proj'
 });
 connection.connect();
 

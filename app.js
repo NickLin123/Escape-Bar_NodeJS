@@ -10,7 +10,8 @@ var cors = require('cors');
 // var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
-var mapRouter = require('./routes/mapquery.js');
+var mapRouter = require('./routes/mapquery');
+var articleRouter = require('./routes/articlequery')
 
 var app = express();
 app.use(cors());
@@ -32,7 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/api', membersRouter);
 
 app.use('/eb', porListRouter);
-// app.use('/', mapRouter);
+app.use('/map', mapRouter);
+app.use('/article', articleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
