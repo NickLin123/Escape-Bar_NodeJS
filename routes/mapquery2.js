@@ -5,10 +5,9 @@ var mysql = require("mysql");
 
 
 const connection = mysql.createConnection({
-    // host: 'localhost',
-    host: "192.168.24.140",
-    user: 'keith77377',
-    password: '',
+    host: 'localhost',
+    user: 'mick',
+    password: '5678',
     database: 'escapebar_proj'
 })
 
@@ -66,18 +65,6 @@ $storeInfoQuery = "SELECT p.`PRO_NAME`, p.`PRICE`, p.`PEOPLE_MIN`, p.`PEOPLE_MAX
 router.route('/store/:sid')
     .get((req, res, next) => {
         connection.query($storeInfoQuery, req.params.sid, (err, results)=>{
-            if(err){return res.send(err)};
-            return res.json({
-                data:results
-            })
-        });
-    });
-
-
-// 部落格文章
-router.route('/article/:name')
-    .get((req, res, next) => {
-        connection.query("SELECT * FROM articles WHERE article_name=?", req.params.name, (err, results)=>{
             if(err){return res.send(err)};
             return res.json({
                 data:results
