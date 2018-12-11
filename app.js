@@ -10,7 +10,10 @@ var cors = require('cors');
 // var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
-var mapRouter = require('./routes/mapquery.js');
+// var mapRouter = require('./routes/mapquery.js');
+var commentRouter = require('./routes/comment')
+
+
 
 var app = express();
 app.use(cors());
@@ -30,6 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', usersRouter);
 //http://localhost:3000/api
 // app.use('/api', membersRouter);
+
+//評論router
+app.use('/pro',commentRouter);
 
 app.use('/eb', porListRouter);
 // app.use('/', mapRouter);
