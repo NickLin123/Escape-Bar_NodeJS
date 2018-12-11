@@ -11,6 +11,9 @@ var cors = require('cors');
 
 var porListRouter = require('./routes/pro_list');
 var mapRouter = require('./routes/mapquery.js');
+var startActivityRouter = require('./routes/startActivity')
+var companyRouter = require('./routes/company');
+var memberRouter = require('./routes/member');
 
 var app = express();
 app.use(cors());
@@ -23,6 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/startActivity', startActivityRouter);
+app.use('/company', companyRouter);
+app.use('/member', memberRouter);
 
 //http://localhost:3000/
 // app.use('/', indexRouter);
