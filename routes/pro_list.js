@@ -2,13 +2,21 @@ var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
 
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//   // host: "192.168.24.140",
+//   user: 'mick',
+//   password: '5678',
+//   database: 'escapebar_proj'
+// });
+
 var connection = mysql.createConnection({
-  host: 'localhost',
-  // host: "192.168.24.140",
-  user: 'mick',
-  password: '5678',
-  database: 'escapebar_proj'
+  host: 'localhost', // 主機位址
+  database: 'escape', // 資料庫名稱
+  user: 'root', // 帳號
+  password: 'admin' // 密碼
 });
+
 connection.connect();
 var selectProductsStr = "SELECT p.`PRO_SEQ`, p.`PRO_NAME`, p.`CID`, p.`PEOPLE_MIN`, p.`PEOPLE_MAX`, p.`GAME_TIME`, p.`PRICE`, p.`P_ID`, p.`PRO_INFO`, p.`HOT_INDEX`, p.`PAGE_VIEWS`, " +
                         "c.`city_id`, c.`city_name`, m.`sid`, m.`s_name`, m.`site_name`, m.`s_tel`, m.`city_id`, m.`s_add`, m.`s_ophr`, m.`lat`, m.`lng`, m.`s_logo`, " +

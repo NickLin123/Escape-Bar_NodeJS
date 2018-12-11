@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var session = require('express-session');
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -13,7 +14,17 @@ var porListRouter = require('./routes/pro_list');
 var mapRouter = require('./routes/mapquery');
 var articleRouter = require('./routes/articlequery')
 
+var indexRouter = require('./routes/index'); // kai
+var membersRouter = require('./routes/members'); // kai
+
 var app = express();
+
+app.use(session({
+  secret: 'abcdefg1234567', // recommand 128 bytes random string
+  resave: false,
+  saveUninitialized: true
+}), indexRouter);
+
 app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +46,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/eb', porListRouter);
 app.use('/map', mapRouter);
 app.use('/article', articleRouter);
+app.use('/', indexRouter); // kai
+app.use('/api', membersRouter); // kai
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,4 +67,18 @@ app.use(function(err, req, res, next) {
 // app.listen(4000, ()=>
 //     console.log(`Server is listening on port 4000`)
 // )
+
+// 登入攔截器 (express interceptors)
+var whitePage = ['/api/login','/api/logout']; // 排除 login, logout API
+app.use(function(req, res, next){
+  var url = req.originalUrl;
+  if(whitePage.indexOf(url)>-1){ //如果 whitePage 存在請求的 url
+    next();
+  } else if (req.session.isLogin) {
+    next();
+  } else {
+    return res.redirect("login");
+  }
+});
+
 module.exports = app;
