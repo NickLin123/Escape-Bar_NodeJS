@@ -34,7 +34,7 @@ router.route('/activity_list')
 
 router.route('/activity_list/:tid')
       .get(function(req,res){
-        connection.query("select a.*, b.*, c.* from `activity_list` as a left join `products` as b ON a.pro_seq = b.pro_seq left join `product_images` as c ON a.pro_seq = c.pro_seq where a.tid=? AND c.status = 'M'", req.params.tid, function(error, results){
+        connection.query("select a.*, b.*, c.*, d.* from `activity_list` as a left join `products` as b ON a.pro_seq = b.pro_seq left join `product_images` as c ON a.pro_seq = c.pro_seq left join `markers` as d ON b.P_ID = d.sid where a.tid=? AND c.status = 'M'", req.params.tid, function(error, results){
           if(error) throw error;
           res.json(results);
         })
@@ -70,7 +70,7 @@ router.route('/activity_joinRecord')
         // req.send("新增資料");  results代表資料庫讀取的資料
         connection.query('insert into `activity_joinRecord` set ?', req.body, function(error){
           if(error) throw error;
-          res.json({message:"新增成功"});
+          res.json({message:"參與揪團成功，已成功發送使用者資訊給揪團者，請密切注意註冊信箱有無最新消息"});
         })
       })
 
