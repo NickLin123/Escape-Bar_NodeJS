@@ -11,18 +11,15 @@ var session = require('express-session');
 // var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
-<<<<<<< HEAD
 var mapRouter = require('./routes/mapquery.js');
 var startActivityRouter = require('./routes/startActivity')
 var companyRouter = require('./routes/company');
 var memberRouter = require('./routes/member');
-=======
 var mapRouter = require('./routes/mapquery');
 var articleRouter = require('./routes/articlequery')
 
 var indexRouter = require('./routes/index'); // kai
 var membersRouter = require('./routes/members'); // kai
->>>>>>> master
 
 var app = express();
 
