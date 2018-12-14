@@ -5,17 +5,18 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 // var session = require('express-session');
+var commentRouter = require('./routes/comment')
 
-var indexRouter = require('./routes/index');
+// var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
-var membersRouter = require('./routes/members');
+// var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
-var mapRouter = require('./routes/mapquery');
-var articleRouter = require('./routes/articlequery')
-var startActivityRouter = require('./routes/startActivity')
-var companyRouter = require('./routes/company');
-var memberRouter = require('./routes/member');
+// var mapRouter = require('./routes/mapquery');
+// var articleRouter = require('./routes/articlequery')
+// var startActivityRouter = require('./routes/startActivity')
+// var companyRouter = require('./routes/company');
+// var memberRouter = require('./routes/member');
 
 var app = express();
 
@@ -39,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/startActivity', startActivityRouter);
 app.use('/company', companyRouter);
 app.use('/member', memberRouter);
+//Nick
+app.use('/pro',commentRouter);
 
 app.use('/eb', porListRouter);
 // app.use('/map', mapRouter);
