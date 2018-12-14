@@ -5,27 +5,20 @@ const multer = require('multer');
 
 // node.js 連接 MySQL 資料庫
 // 建立連線物件
-// var connection = mysql.createConnection({
-//   host: 'localhost', // 主機位址
-//   database: 'escape', // 資料庫名稱
-//   user: 'root', // 帳號
-//   password: 'admin' // 密碼
-// });
+var connection = mysql.createConnection({
+  host: 'localhost', // 主機位址
+  database: 'escape', // 資料庫名稱
+  user: 'root', // 帳號
+  password: 'admin' // 密碼
+});
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  // host: "192.168.24.140",
-  user: 'mick',
-  password: '5678',
-  database: 'escapebar_proj'
-})
-
-// var connection = mysql.createConnection({
-//   host: 'http://192.168.24.140', // 主機位址
-//   database: 'escapebar_proj', // 資料庫名稱
-//   user: 'kaifresh28', // 帳號
-//   password: '' // 密碼
-// });
+// const connection = mysql.createConnection({
+//   host: 'localhost',
+//   // host: "192.168.24.140",
+//   user: 'mick',
+//   password: '5678',
+//   database: 'escapebar_proj'
+// })
 
 // 真正建立連線
 connection.connect();
@@ -385,8 +378,10 @@ var upload2 = multer({ storage: storage2 })
     // GET：http://localhost:3000/api/orders/3
     .get(function(req,res){
       // res.send("get all orders");
-        connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`STOCK_ID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` JOIN `company` ON `products`.`CID` = `company`.`cid` JOIN `company_comparison` ON `company`.`cid` = `company_comparison`.`cid` JOIN `markers` ON `company_comparison`.`sid` = `markers`.`sid` WHERE `status_list`.`STATUS` = 1 AND uid=?", req.params.id,function(error,results){
-        if(error) throw error;
+        // connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`STOCK_ID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` JOIN `company` ON `products`.`CID` = `company`.`cid` JOIN `company_comparison` ON `company`.`cid` = `company_comparison`.`cid` JOIN `markers` ON `company_comparison`.`sid` = `markers`.`sid` WHERE `status_list`.`STATUS` = 1 AND uid=?", req.params.id,function(error,results){
+        connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`SID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` JOIN `company` ON `products`.`CID` = `company`.`cid` JOIN `company_comparison` ON `company`.`cid` = `company_comparison`.`cid` JOIN `markers` ON `company_comparison`.`sid` = `markers`.`sid` WHERE `status_list`.`STATUS` = 1 AND uid=?", req.params.id,function(error,results){
+
+          if(error) throw error;
         res.json(results); // 將資料庫回傳的結果，轉成 json 格式，回應給瀏覽器 Client 端
       });
     })
@@ -416,8 +411,9 @@ var upload2 = multer({ storage: storage2 })
     // GET：http://localhost:3000/api/orders/3
     .get(function(req,res){
       // res.send("get all orders");
-        connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`STOCK_ID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` JOIN `company` ON `products`.`CID` = `company`.`cid` JOIN `company_comparison` ON `company`.`cid` = `company_comparison`.`cid` JOIN `markers` ON `company_comparison`.`sid` = `markers`.`sid` WHERE `status_list`.`STATUS` = 4 AND uid=?", req.params.id,function(error,results){
-        if(error) throw error;
+        // connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`STOCK_ID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` JOIN `company` ON `products`.`CID` = `company`.`cid` JOIN `company_comparison` ON `company`.`cid` = `company_comparison`.`cid` JOIN `markers` ON `company_comparison`.`sid` = `markers`.`sid` WHERE `status_list`.`STATUS` = 4 AND uid=?", req.params.id,function(error,results){
+        connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`SID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` JOIN `company` ON `products`.`CID` = `company`.`cid` JOIN `company_comparison` ON `company`.`cid` = `company_comparison`.`cid` JOIN `markers` ON `company_comparison`.`sid` = `markers`.`sid` WHERE `status_list`.`STATUS` = 4 AND uid=?", req.params.id,function(error,results){
+          if(error) throw error;
         res.json(results); // 將資料庫回傳的結果，轉成 json 格式，回應給瀏覽器 Client 端
       });
     })
@@ -426,8 +422,10 @@ var upload2 = multer({ storage: storage2 })
     router.route('/laorder/:id')
     // GET：http://localhost:3000/api/laorder/3
     .get(function(req,res){
-        connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`STOCK_ID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` WHERE `status_list`.`STATUS` = 1 AND uid=? LIMIT 0,1", req.params.id,function(error,results){
-        if(error) throw error;
+        // connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`STOCK_ID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` WHERE `status_list`.`STATUS` = 1 AND uid=? LIMIT 0,1", req.params.id,function(error,results){
+        connection.query("SELECT * FROM `buy_list` JOIN `product_stock` ON `buy_list`.`STOCK_SID` = `product_stock`.`SID` JOIN `status_list` ON `buy_list`.`STATUS` = `status_list`.`STATUS` JOIN `products` ON `product_stock`.`PRO_SEQ` = `products`.`PRO_SEQ` JOIN `product_images` ON `products`.`PRO_SEQ` = `product_images`.`PRO_SEQ` WHERE `status_list`.`STATUS` = 1 AND uid=? LIMIT 0,1", req.params.id,function(error,results){
+
+          if(error) throw error;
         res.json(results); // 將資料庫回傳的結果，轉成 json 格式，回應給瀏覽器 Client 端
       });
     })

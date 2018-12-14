@@ -3,11 +3,18 @@ var router = express.Router();
 var mysql = require('mysql');
 
 // 建立連線
+// var connection = mysql.createConnection({
+//     host: "192.168.24.140",
+//     user: 'keith77377',
+//     password: '',
+//     database: 'escapebar_proj'
+// });
+
 var connection = mysql.createConnection({
-    host: "192.168.24.140",
-    user: 'keith77377',
-    password: '',
-    database: 'escapebar_proj'
+  host: 'localhost', // 主機位址
+  database: 'escape', // 資料庫名稱
+  user: 'root', // 帳號
+  password: 'admin' // 密碼
 });
 
 connection.connect(err =>{
