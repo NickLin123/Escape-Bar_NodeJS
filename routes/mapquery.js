@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mysql = require("mysql");
 
-
-
 // const connection = mysql.createConnection({
 //     host: 'localhost',
 //     // host: "192.168.24.140",
