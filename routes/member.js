@@ -11,18 +11,11 @@ var mysql = require('mysql');
 // });
 
 var connection = mysql.createConnection({
-<<<<<<< HEAD
-  host: 'localhost', // 主機位址
-  database: 'escape', // 資料庫名稱
-  user: 'root', // 帳號
-  password: 'admin' // 密碼
-=======
   host: 'localhost',
   port: 8889,
   user: 'root',
   password: 'root',
   database: 'escape_bar'
->>>>>>> Charlie
 });
 
 connection.connect(err =>{
