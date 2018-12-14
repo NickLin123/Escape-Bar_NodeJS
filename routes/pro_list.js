@@ -3,13 +3,11 @@ var router = express.Router();
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-  // host: "192.168.24.140",
-  host: "localhost",
-  // database: "escapebar_proj",
-  database: "escapebar",
-  // user: "keith77377",
-  user: "root",
-  password: ""
+  host: 'localhost',
+    port: 8889,
+    user: 'root',
+    password: 'root',
+    database: 'escape_bar'
 });
 connection.connect();
 var selectProductsStr = "SELECT p.`PRO_SEQ`, p.`PRO_NAME`, p.`CID`, p.`PEOPLE_MIN`, p.`PEOPLE_MAX`, p.`GAME_TIME`, p.`PRICE`, p.`P_ID`, p.`PRO_INFO`, p.`HOT_INDEX`, p.`PAGE_VIEWS`, " +

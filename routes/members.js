@@ -6,10 +6,11 @@ const multer = require('multer');
 // node.js 連接 MySQL 資料庫
 // 建立連線物件
 var connection = mysql.createConnection({
-  host: 'localhost', // 主機位址
-  database: 'escape', // 資料庫名稱
-  user: 'root', // 帳號
-  password: 'admin' // 密碼
+  host: 'localhost',
+    port: 8889,
+    user: 'root',
+    password: 'root',
+    database: 'escape_bar'
 });
 
 // var connection = mysql.createConnection({
