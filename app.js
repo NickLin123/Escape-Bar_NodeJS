@@ -7,7 +7,11 @@ var cors = require('cors');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
+<<<<<<< HEAD
 var usersRouter = require('./routes/users');
+=======
+// var usersRouter = require('./routes/users');
+>>>>>>> Charlie
 var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
@@ -16,6 +20,10 @@ var articleRouter = require('./routes/articlequery')
 var startActivityRouter = require('./routes/startActivity')
 var companyRouter = require('./routes/company');
 var memberRouter = require('./routes/member');
+<<<<<<< HEAD
+=======
+var articleRouter = require('./routes/articlequery.js');
+>>>>>>> Charlie
 
 var app = express();
 

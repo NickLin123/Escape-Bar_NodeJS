@@ -11,10 +11,18 @@ var mysql = require('mysql');
 // });
 
 var connection = mysql.createConnection({
+<<<<<<< HEAD
   host: 'localhost', // 主機位址
   database: 'escape', // 資料庫名稱
   user: 'root', // 帳號
   password: 'admin' // 密碼
+=======
+  host: 'localhost',
+  port: 8889,
+  user: 'root',
+  password: 'root',
+  database: 'escape_bar'
+>>>>>>> Charlie
 });
 
 connection.connect(err =>{
@@ -109,5 +117,11 @@ router.route('/site/selectOption/:pro_name')
         })
       })
 
-
+router.route('/gameInfo/:pro_seq')
+      .get(function(req,res){
+        connection.query("select a.*, b.* from `products` as a left join `product_images` as b ON a.pro_seq = b.pro_seq where a.pro_seq=? AND b.status = 'M'", req.params.pro_seq, function(error, results){
+          if(error) throw error;
+          res.json(results);
+        })
+      })
 module.exports = router;
