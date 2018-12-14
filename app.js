@@ -6,35 +6,16 @@ var logger = require('morgan');
 var cors = require('cors');
 // var session = require('express-session');
 
-// var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
-// var membersRouter = require('./routes/members');
+var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
-// <<<<<<< HEAD
-// var mapRouter = require('./routes/mapquery.js');
-var commentRouter = require('./routes/comment')
-
-
-// var mapRouter = require('./routes/mapquery.js');
-// var startActivityRouter = require('./routes/startActivity')
-// var companyRouter = require('./routes/company');
-// var memberRouter = require('./routes/member');
-// =======
-// var mapRouter = require('./routes/mapquery');
-// var articleRouter = require('./routes/articlequery')
-// var startActivityRouter = require('./routes/startActivity')
-// var companyRouter = require('./routes/company');
-// var memberRouter = require('./routes/member');
-// <<<<<<< HEAD
-// // =======
-// var mapRouter = require('./routes/mapquery');
-// var articleRouter = require('./routes/articlequery')
-
-// var indexRouter = require('./routes/index'); // kai
-// var membersRouter = require('./routes/members'); // kai
-// >>>>>>> Charlie
-// >>>>>>> origin/master
+var mapRouter = require('./routes/mapquery');
+var articleRouter = require('./routes/articlequery')
+var startActivityRouter = require('./routes/startActivity')
+var companyRouter = require('./routes/company');
+var memberRouter = require('./routes/member');
 
 var app = express();
 
@@ -54,19 +35,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/startActivity', startActivityRouter);
-// app.use('/company', companyRouter);
-// app.use('/member', memberRouter);
 
-//http://localhost:3000/
-// app.use('/', indexRouter);
-//http://localhost:3000/users
-// app.use('/users', usersRouter);
-//http://localhost:3000/api
-// app.use('/api', membersRouter);
-
-//Nick router
-app.use('/pro',commentRouter);
+app.use('/startActivity', startActivityRouter);
+app.use('/company', companyRouter);
+app.use('/member', memberRouter);
 
 app.use('/eb', porListRouter);
 // app.use('/map', mapRouter);

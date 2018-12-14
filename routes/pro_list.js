@@ -2,7 +2,16 @@ var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
 
-var connection = mysql.createConnection({
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//     port: 8889,
+//     user: 'root',
+//     password: 'root',
+//     database: 'escape_bar'
+// });
+
+const connection = mysql.createConnection({
+  host: 'localhost',
   // host: "192.168.24.140",
   host: "localhost",
   // database: "escapebar_proj",
