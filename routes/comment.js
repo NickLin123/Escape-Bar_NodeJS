@@ -91,6 +91,13 @@ router
         res.json(rows);
       })
   }) 
+  router.route("/ratingcard")
+  .get(function(req, res) {//評價平均數
+      connection.query("select a.gid, b.PRO_SEQ from  `comment` as a LEFT JOIN `Product` as b ON a.gid = b.gid where gid=?",req.params.id,function(error,rows){
+        if (error) throw error;
+        res.json(rows);
+      })
+  }) 
 
   // router.route("/count")
   // .get(function(req, res) {//評價總筆數
@@ -113,7 +120,7 @@ router
   .post(function(req, res) {//收藏資料
     var _user = req.body;
   
-   connection.query("insert into collection set ?", _user,function(error){
+   connection.query("insert into member_collectgame set ?", _user,function(error){
       if (error) throw error;
       res.json({ message: "收藏成功" });
    })
@@ -122,7 +129,7 @@ router
  router
  .route("/track")
  .post(function(req, res) {//追蹤工作室
-  connection.query("insert into track set ?",req.body,function(error){
+  connection.query("insert into member_trackstudio set ?",req.body,function(error){
      if (error) throw error;
      res.json({ message: "追蹤成功" });
   })

@@ -12,39 +12,39 @@ const multer = require('multer');
 //   password: 'admin' // 密碼
 // });
 
-var connection = mysql.createConnection({
-  host: 'http://192.168.24.140', // 主機位址
-  database: 'escapebar_proj', // 資料庫名稱
-  user: 'kaifresh28', // 帳號
-  password: '' // 密碼
-});
+// var connection = mysql.createConnection({
+//   host: 'http://192.168.24.140', // 主機位址
+//   database: 'escapebar_proj', // 資料庫名稱
+//   user: 'kaifresh28', // 帳號
+//   password: '' // 密碼
+// });
 
 // 真正建立連線
-connection.connect();
+// connection.connect();
 
-    /* GET members listing. */
-    router.get('/', function(req, res, next) {
-      res.send('GET members API listing.');
-    });
-    //////////////////////////
+//     /* GET members listing. */
+//     router.get('/', function(req, res, next) {
+//       res.send('GET members API listing.');
+//     });
+//     //////////////////////////
 
-    router.get('/session', function(req, res, next) {
+//     router.get('/session', function(req, res, next) {
 
-      if (!req.session) {
-        res.send("session null");
-        return;
-      }
+//       if (!req.session) {
+//         res.send("session null");
+//         return;
+//       }
 
-      if(req.session.isVisit) {
-        req.session.isVisit++;
-        req.session.other++;
-        res.send('<p>第 ' + req.session.isVisit + '次來此頁面</p>'+req.session.other);
-      } else {
-        req.session.isVisit = 1;
-        req.session.other = 1;
-        res.send("歡迎第一次到訪");
-      }
-    });
+//       if(req.session.isVisit) {
+//         req.session.isVisit++;
+//         req.session.other++;
+//         res.send('<p>第 ' + req.session.isVisit + '次來此頁面</p>'+req.session.other);
+//       } else {
+//         req.session.isVisit = 1;
+//         req.session.other = 1;
+//         res.send("歡迎第一次到訪");
+//       }
+//     });
 
     // Logout API
     router.route('/logout')

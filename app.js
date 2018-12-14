@@ -4,13 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var session = require('express-session');
+// var session = require('express-session');
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 // var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
+// <<<<<<< HEAD
 // var mapRouter = require('./routes/mapquery.js');
 var commentRouter = require('./routes/comment')
 
@@ -19,6 +20,21 @@ var commentRouter = require('./routes/comment')
 // var startActivityRouter = require('./routes/startActivity')
 // var companyRouter = require('./routes/company');
 // var memberRouter = require('./routes/member');
+// =======
+// var mapRouter = require('./routes/mapquery');
+// var articleRouter = require('./routes/articlequery')
+// var startActivityRouter = require('./routes/startActivity')
+// var companyRouter = require('./routes/company');
+// var memberRouter = require('./routes/member');
+// <<<<<<< HEAD
+// // =======
+// var mapRouter = require('./routes/mapquery');
+// var articleRouter = require('./routes/articlequery')
+
+// var indexRouter = require('./routes/index'); // kai
+// var membersRouter = require('./routes/members'); // kai
+// >>>>>>> Charlie
+// >>>>>>> origin/master
 
 var app = express();
 

@@ -12,12 +12,12 @@ var mysql = require("mysql");
 //     database: 'escapebar_proj'
 // })
 
-const connection = mysql.createConnection({
-    host: 'localhost', // 主機位址
-    database: 'escape', // 資料庫名稱
-    user: 'root', // 帳號
-    password: 'admin' // 密碼
-  });
+// const connection = mysql.createConnection({
+//     host: 'localhost', // 主機位址
+//     database: 'escape', // 資料庫名稱
+//     user: 'root', // 帳號
+//     password: 'admin' // 密碼
+//   });
 
 connection.connect(err =>{
     if(err) { return err;}
