@@ -16,14 +16,6 @@ var articleRouter = require('./routes/articlequery')
 var startActivityRouter = require('./routes/startActivity')
 var companyRouter = require('./routes/company');
 var memberRouter = require('./routes/member');
-<<<<<<< HEAD
-=======
-var mapRouter = require('./routes/mapquery');
-var articleRouter = require('./routes/articlequery')
-
-var indexRouter = require('./routes/index'); // kai
-var membersRouter = require('./routes/members'); // kai
->>>>>>> Charlie
 
 var app = express();
 
