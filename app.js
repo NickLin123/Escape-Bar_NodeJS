@@ -6,12 +6,13 @@ var logger = require('morgan');
 var cors = require('cors');
 var session = require('express-session');
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-// var membersRouter = require('./routes/members');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
-var mapRouter = require('./routes/mapquery.js');
+var mapRouter = require('./routes/mapquery');
+var articleRouter = require('./routes/articlequery')
 var startActivityRouter = require('./routes/startActivity')
 var companyRouter = require('./routes/company');
 var memberRouter = require('./routes/member');

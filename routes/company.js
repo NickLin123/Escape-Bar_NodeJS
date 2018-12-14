@@ -3,12 +3,20 @@ var router = express.Router();
 var mysql = require('mysql');
 
 // 建立連線
-var connection = mysql.createConnection({
-    host: "192.168.24.140",
-    user: 'keith77377',
-    password: '',
-    database: 'escapebar_proj'
-});
+// var connection = mysql.createConnection({
+//     host: "192.168.24.140",
+//     user: 'keith77377',
+//     password: '',
+//     database: 'escapebar_proj'
+// });
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  // host: "192.168.24.140",
+  user: 'mick',
+  password: '5678',
+  database: 'escapebar_proj'
+})
 
 connection.connect(err =>{
     if(err) { return err;}

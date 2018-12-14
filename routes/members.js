@@ -5,12 +5,20 @@ const multer = require('multer');
 
 // node.js 連接 MySQL 資料庫
 // 建立連線物件
-var connection = mysql.createConnection({
-  host: 'localhost', // 主機位址
-  database: 'escape', // 資料庫名稱
-  user: 'root', // 帳號
-  password: 'admin' // 密碼
-});
+// var connection = mysql.createConnection({
+//   host: 'localhost', // 主機位址
+//   database: 'escape', // 資料庫名稱
+//   user: 'root', // 帳號
+//   password: 'admin' // 密碼
+// });
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  // host: "192.168.24.140",
+  user: 'mick',
+  password: '5678',
+  database: 'escapebar_proj'
+})
 
 // var connection = mysql.createConnection({
 //   host: 'http://192.168.24.140', // 主機位址
