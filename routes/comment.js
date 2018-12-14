@@ -4,8 +4,12 @@ var mysql = require("mysql");
 
 //建立連線
 var connection = mysql.createConnection({
-  host:'localhost',
-  user:'root',
+  // host:'localhost',
+  // user:'root',
+  // password:'',
+  // database:'escapebar_proj'
+  host:'192.138.24.140',
+  user:'s0913741399',
   password:'',
   database:'escapebar_proj'
   
