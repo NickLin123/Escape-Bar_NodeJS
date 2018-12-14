@@ -14,7 +14,7 @@ var router = express.Router();
 const sgMail = require('@sendgrid/mail'); //sendgrid library to send emails 
 
 //sendgrid api key
-// sgMail.setApiKey(''); // *** Can't Push on Github ***
+sgMail.setApiKey('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'); // *** Can't Push on Github ***
 
 // Welcome page of the express server: 
 router.get('/', (req, res) => {

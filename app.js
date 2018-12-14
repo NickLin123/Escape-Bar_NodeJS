@@ -7,7 +7,7 @@ var cors = require('cors');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 var membersRouter = require('./routes/members');
 
 var porListRouter = require('./routes/pro_list');
@@ -35,16 +35,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/startActivity', startActivityRouter);
 app.use('/company', companyRouter);
 app.use('/member', memberRouter);
-
-//http://localhost:3000/
-// app.use('/', indexRouter);
-//http://localhost:3000/users
-// app.use('/users', usersRouter);
-//http://localhost:3000/api
-// app.use('/api', membersRouter);
 
 app.use('/eb', porListRouter);
 app.use('/map', mapRouter);

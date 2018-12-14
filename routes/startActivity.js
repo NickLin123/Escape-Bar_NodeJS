@@ -3,11 +3,19 @@ var router = express.Router();
 var mysql = require('mysql');
 
 // 建立連線
+// var connection = mysql.createConnection({
+//     host: "192.168.24.140",
+//     user: 'keith77377',
+//     password: '',
+//     database: 'escapebar_proj'
+// });
+
 var connection = mysql.createConnection({
-    host: "192.168.24.140",
-    user: 'keith77377',
-    password: '',
-    database: 'escapebar_proj'
+  host: 'localhost',
+  port: 8889,
+  user: 'root',
+  password: 'root',
+  database: 'escape_bar'
 });
 
 connection.connect(err =>{
@@ -16,7 +24,7 @@ connection.connect(err =>{
 
 router.route('/activity_list')
       .get(function(req,res){
-        connection.query("select a.*, b.*, c.sid, c.s_name, d.*, e.uid, e.nickname, e.user_pic from `activity_list` as a left join `products` as b ON a.pro_seq = b.pro_seq left join `markers` as c ON b.p_id = c.sid left join `product_images` as d ON d.pro_seq = a.pro_seq left join `member` as e ON a.act_uid = e.uid", function(error,results,fields){
+        connection.query("select a.*, b.*, c.sid, c.s_name, d.*, e.uid, e.nickname, e.user_pic from `activity_list` as a left join `products` as b ON a.pro_seq = b.pro_seq left join `markers` as c ON b.p_id = c.sid left join `product_images` as d ON d.pro_seq = a.pro_seq left join `member` as e ON a.act_uid = e.uid where d.status = 'M' ", function(error,results,fields){
           if(error){
             throw error;
           }
@@ -102,5 +110,11 @@ router.route('/site/selectOption/:pro_name')
         })
       })
 
-
+router.route('/gameInfo/:pro_seq')
+      .get(function(req,res){
+        connection.query("select a.*, b.* from `products` as a left join `product_images` as b ON a.pro_seq = b.pro_seq where a.pro_seq=? AND b.status = 'M'", req.params.pro_seq, function(error, results){
+          if(error) throw error;
+          res.json(results);
+        })
+      })
 module.exports = router;
