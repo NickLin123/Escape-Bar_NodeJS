@@ -15,18 +15,18 @@ var porListRouter = require('./routes/pro_list');
 var commentRouter = require('./routes/comment')
 
 
-var mapRouter = require('./routes/mapquery.js');
-var startActivityRouter = require('./routes/startActivity')
-var companyRouter = require('./routes/company');
-var memberRouter = require('./routes/member');
+// var mapRouter = require('./routes/mapquery.js');
+// var startActivityRouter = require('./routes/startActivity')
+// var companyRouter = require('./routes/company');
+// var memberRouter = require('./routes/member');
 
 var app = express();
 
-app.use(session({
-  secret: 'abcdefg1234567', // recommand 128 bytes random string
-  resave: false,
-  saveUninitialized: true
-}), indexRouter);
+// app.use(session({
+//   secret: 'abcdefg1234567', // recommand 128 bytes random string
+//   resave: false,
+//   saveUninitialized: true
+// }), indexRouter);
 
 app.use(cors());
 // view engine setup
@@ -38,9 +38,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/startActivity', startActivityRouter);
-app.use('/company', companyRouter);
-app.use('/member', memberRouter);
+// app.use('/startActivity', startActivityRouter);
+// app.use('/company', companyRouter);
+// app.use('/member', memberRouter);
 
 //http://localhost:3000/
 // app.use('/', indexRouter);
@@ -49,14 +49,14 @@ app.use('/member', memberRouter);
 //http://localhost:3000/api
 // app.use('/api', membersRouter);
 
-//評論router
+//Nick router
 app.use('/pro',commentRouter);
 
 app.use('/eb', porListRouter);
-app.use('/map', mapRouter);
-app.use('/article', articleRouter);
-app.use('/', indexRouter); // kai
-app.use('/api', membersRouter); // kai
+// app.use('/map', mapRouter);
+// app.use('/article', articleRouter);
+// app.use('/', indexRouter); // kai
+// app.use('/api', membersRouter); // kai
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

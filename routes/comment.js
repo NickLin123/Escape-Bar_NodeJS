@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
   host:'localhost',
   user:'root',
   password:'',
-  database:'project',
+  database:'escapebar_proj'
   
 });
 // connection.connect();
@@ -23,14 +23,14 @@ connection.connect(function(err) {
 router
   .route("/comment")
   .get(function(req, res) {//讀所有資料
-      connection.query("select * from comment_test",function(error,rows){
+      connection.query("select * from `comment`",function(error,rows){
         if (error) throw error;
         res.json(rows);
       })
   }) 
   .post(function(req, res) {//新增資料
      var _user = req.body;
-    connection.query("insert into comment_test set ?", _user,function(error){
+    connection.query("insert into  `comment` set ?", _user,function(error){
        if (error) throw error;
        res.json({ message: "評論成功" });
     })
@@ -49,7 +49,7 @@ router
   router
   .route("/comment/:id")//特定遊戲
   .get(function(req, res) {
-    connection.query("select a.*, b.nickname, b.user_pic from `comment_test` as a LEFT JOIN `member` as b ON a.uid = b.uid where gid=?", req.params.id,function(error,row){
+    connection.query("select a.*, b.nickname, b.user_pic from  `comment` as a LEFT JOIN `member` as b ON a.uid = b.uid where gid=?", req.params.id,function(error,row){
       if(error) throw error;
       res.json(row);
     });
@@ -57,20 +57,25 @@ router
   
   }) 
   .put(function(req, res) {//修改資料
-  
-       connection.query("update comments set ? where id=?",[req.body,req.params.id],function(error){
+    var _comment = req.body;  
+    console.log(req.body.comment);
+    console.log(req.params.id);
+    console.log(req.body.uid)
+    var id = req.params.id;
+    var uid = req.body.uid
+       connection.query("update `comment` set comment=? where gid=? and uid=?",[req.body.comment,id,uid],function(error){
           if(error) throw error;
           res.json({ message: "修改成功" });
        })
   }) 
 
-  router.route("/member")
-  .get(function(req, res) {//會員照片&名稱
-      connection.query("SELECT nickname,user_pic FROM member JOIN `comments` ON member.uid = `comments`.uid",function(error,rows){
-        if (error) throw error;
-        res.json(rows);
-      })
-  }) 
+  // router.route("/member")
+  // .get(function(req, res) {//會員照片&名稱
+  //     connection.query("SELECT nickname,user_pic FROM member JOIN `comments` ON member.uid = `comments`.uid",function(error,rows){
+  //       if (error) throw error;
+  //       res.json(rows);
+  //     })
+  // }) 
 
   // router.route("/rating")
   // .get(function(req, res) {//評價平均數
@@ -81,7 +86,7 @@ router
   // }) 
   router.route("/rating/:id")
   .get(function(req, res) {//評價平均數
-      connection.query("SELECT AVG(rating)rating FROM `comment_test` where gid=?",req.params.id,function(error,rows){
+      connection.query("SELECT AVG(rating)rating FROM  `comment` where gid=?",req.params.id,function(error,rows){
         if (error) throw error;
         res.json(rows);
       })
@@ -97,21 +102,14 @@ router
 
   router.route("/count/:id")
   .get(function(req, res) {//評價總筆數
-      connection.query("SELECT COUNT(*)count FROM comment_test where gid=?",req.params.id,function(error,rows){
+      connection.query("SELECT COUNT(*)count FROM  `comment` where gid=?",req.params.id,function(error,rows){
         if (error) throw error;
         res.json(rows);
       })
   }) 
 
   router
-  .route("/collection/:id")
-  .get(function(req, res) {
-    connection.query("SELECT name FROM `comments`",function(error,row){
-      if(error) throw error;
-      res.json(row);
-
-    });
-  }) 
+  .route("/collection/")
   .post(function(req, res) {//收藏資料
     var _user = req.body;
   
@@ -121,6 +119,14 @@ router
    })
  }); 
   
+ router
+ .route("/track")
+ .post(function(req, res) {//追蹤工作室
+  connection.query("insert into track set ?",req.body,function(error){
+     if (error) throw error;
+     res.json({ message: "追蹤成功" });
+  })
+}); 
   router
 //   .route("/memberapi")
 //   .get(function(req, res) {
@@ -130,14 +136,16 @@ router
 
 //     });
 //   }) 
-  // .route("/memberapi")
-  // .get(function(req, res) {
-  //   connection.query("SELECT * FROM `member`",function(error,row){
-  //     if(error) throw error;
-  //     res.json(row);
+.route("/member/:id")//評論遊戲的成員
+.get(function(req, res) {
+var id = req.params.id
+console.log(req.params.id)
+  connection.query("SELECT uid FROM `comment` where gid=?",id,function(error,row){
+    if(error) throw error;
+    res.json(row);
 
-  //   });
-  // }) 
+  });
+}) 
   // .post(function(req, res) {
   //   var _user = req.body;
   //   connection.query("insert into comment set ?", _user,function(error){
