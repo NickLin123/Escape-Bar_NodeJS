@@ -10,13 +10,21 @@ var mysql = require('mysql');
 //     database: 'escapebar_proj'
 // });
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
-  port: 8889,
-  user: 'root',
-  password: 'root',
-  database: 'escape_bar'
-});
+  // host: "192.168.24.140",
+  user: 'mick',
+  password: '5678',
+  database: 'escapebar_proj'
+})
+
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//   port: 8889,
+//   user: 'root',
+//   password: 'root',
+//   database: 'escape_bar'
+// });
 
 connection.connect(err =>{
     if(err) { return err;}

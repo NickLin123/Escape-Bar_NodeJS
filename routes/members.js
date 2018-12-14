@@ -5,21 +5,21 @@ const multer = require('multer');
 
 // node.js 連接 MySQL 資料庫
 // 建立連線物件
-var connection = mysql.createConnection({
-  host: 'localhost',
-    port: 8889,
-    user: 'root',
-    password: 'root',
-    database: 'escape_bar'
-});
-
-// const connection = mysql.createConnection({
+// var connection = mysql.createConnection({
 //   host: 'localhost',
-//   // host: "192.168.24.140",
-//   user: 'mick',
-//   password: '5678',
-//   database: 'escapebar_proj'
-// })
+//     port: 8889,
+//     user: 'root',
+//     password: 'root',
+//     database: 'escape_bar'
+// });
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  // host: "192.168.24.140",
+  user: 'mick',
+  password: '5678',
+  database: 'escapebar_proj'
+})
 
 // 真正建立連線
 connection.connect();
