@@ -2,16 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
 
-// var connection = mysql.createConnection({
-//   host: 'localhost',
-//     port: 8889,
-//     user: 'root',
-//     password: 'root',
-//     database: 'escape_bar'
-// });
-
-const connection = mysql.createConnection({
-  host: 'localhost',
+var connection = mysql.createConnection({
   // host: "192.168.24.140",
   host: "localhost",
   // database: "escapebar_proj",
@@ -20,15 +11,6 @@ const connection = mysql.createConnection({
   user: "root",
   password: ""
 });
-
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   // host: "192.168.24.140",
-//   user: 'mick',
-//   password: '5678',
-//   database: 'escapebar_proj'
-// })
-
 connection.connect();
 var selectProductsStr = "SELECT p.`PRO_SEQ`, p.`PRO_NAME`, p.`CID`, p.`PEOPLE_MIN`, p.`PEOPLE_MAX`, p.`GAME_TIME`, p.`PRICE`, p.`P_ID`, p.`PRO_INFO`, p.`HOT_INDEX`, p.`PAGE_VIEWS`, " +
                         "c.`city_id`, c.`city_name`, m.`sid`, m.`s_name`, m.`site_name`, m.`s_tel`, m.`city_id`, m.`s_add`, m.`s_ophr`, m.`lat`, m.`lng`, m.`s_logo`, " +
@@ -138,6 +120,7 @@ router
         res.json(results)
       })
   });
+// 首頁搜尋
 router
   .route("/pro_list/homeSearch/:str")
   .get(function(req,res){
@@ -150,4 +133,36 @@ router
         res.json(results)
       })
   })
+//購買時註冊
+router
+  .route("/buy/register")
+  .post((req, res) => {
+    connection.query("SELECT `email` FROM `member` WHERE `email`=?"
+    , [req.body.email], function(error, results) {
+      if(error) throw error
+      if(results.length > 0){
+        console.log('email重複')
+        res.json({message : "email重複"})
+        return
+      }
+      connection.query("INSERT INTO `member` SET ?", req.body, function(error){
+        console.log(req.body);
+        if(error) throw error;
+        res.json({message: "註冊成功"});
+      })
+    })
+  })
+//建立訂單
+router
+  .route("/buy/buyList")
+  .post((req, res) => {
+    connection.query("INSERT INTO `buy_list` SET?", req.body, function(error){
+      if(error) throw error
+      connection.query("UPDATE `product_stock` SET `STATUS` = 'N' WHERE SID=?", req.body.STOCK_SID, function(error){
+        if(error) throw error
+        res.json({message: "預約成功"})
+      })
+    })
+  })
+
 module.exports = router;
