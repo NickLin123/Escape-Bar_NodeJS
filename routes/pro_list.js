@@ -138,6 +138,7 @@ router
         res.json(results)
       })
   });
+// 首頁搜尋
 router
   .route("/pro_list/homeSearch/:str")
   .get(function(req,res){
@@ -150,4 +151,36 @@ router
         res.json(results)
       })
   })
+//購買時註冊
+router
+  .route("/buy/register")
+  .post((req, res) => {
+    connection.query("SELECT `email` FROM `member` WHERE `email`=?"
+    , [req.body.email], function(error, results) {
+      if(error) throw error
+      if(results.length > 0){
+        console.log('email重複')
+        res.json({message : "email重複"})
+        return
+      }
+      connection.query("INSERT INTO `member` SET ?", req.body, function(error){
+        console.log(req.body);
+        if(error) throw error;
+        res.json({message: "註冊成功"});
+      })
+    })
+  })
+//建立訂單
+router
+  .route("/buy/buyList")
+  .post((req, res) => {
+    connection.query("INSERT INTO `buy_list` SET?", req.body, function(error){
+      if(error) throw error
+      connection.query("UPDATE `product_stock` SET `STATUS` = 'N' WHERE SID=?", req.body.STOCK_SID, function(error){
+        if(error) throw error
+        res.json({message: "預約成功"})
+      })
+    })
+  })
+
 module.exports = router;
