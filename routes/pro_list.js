@@ -10,24 +10,24 @@ var mysql = require("mysql");
 //     database: 'escape_bar'
 // });
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  // host: "192.168.24.140",
-  host: "localhost",
-  // database: "escapebar_proj",
-  database: "escapebar",
-  // user: "keith77377",
-  user: "root",
-  password: ""
-});
-
 // const connection = mysql.createConnection({
 //   host: 'localhost',
 //   // host: "192.168.24.140",
-//   user: 'mick',
-//   password: '5678',
-//   database: 'escapebar_proj'
-// })
+//   host: "localhost",
+//   // database: "escapebar_proj",
+//   database: "escapebar",
+//   // user: "keith77377",
+//   user: "root",
+//   password: ""
+// });
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  // host: "192.168.24.140",
+  user: 'mick',
+  password: '5678',
+  database: 'escapebar_proj'
+})
 
 connection.connect();
 var selectProductsStr = "SELECT p.`PRO_SEQ`, p.`PRO_NAME`, p.`CID`, p.`PEOPLE_MIN`, p.`PEOPLE_MAX`, p.`GAME_TIME`, p.`PRICE`, p.`P_ID`, p.`PRO_INFO`, p.`HOT_INDEX`, p.`PAGE_VIEWS`, " +
