@@ -18,7 +18,7 @@
     "@sendgrid/mail": "^6.3.1",
     "body-parser": "^1.18.3",
     "express-interceptor": "^1.2.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.1"
   },
   "devDependencies": {
